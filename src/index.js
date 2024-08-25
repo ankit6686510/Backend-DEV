@@ -1,23 +1,32 @@
 // require('dotenv').config({path:'./env'}) we can improve this line of code as it breaks our consistency in code
-import dotenv from "dotenv"
+import express from "express";
+import dotenv from "dotenv";
+import connectDB from "./db/index.js";
 
-import connectDB from "./db/index.js"
+// Initialize dotenv to use environment variables
+dotenv.config({
+    path: './env'
+});
 
-dotenv.config({ //another way  to use dotenv and the best way
-    path : './env'
-})
+// Initialize Express app
+const app = express();
 
+//i was getting this error bcz i have not initilize app i.e const app = express
+// MongoDB connected !! DB HOST : [object Object]
+// MONGO db connection failed !! ReferenceError: app is not defined
+
+// Connect to the database
 connectDB()
-.then( () => {
-    app.listen(process.env.PORT || 8000 , () => {
-        console.log(` server is running at: ${process.env.PORT}`)
+    .then(() => {
+        // Start the server after successful database connection
+        app.listen(process.env.PORT || 8000, () => {
+            console.log(`Server is running at: ${process.env.PORT}`);
+        });
     })
-})
-.catch((err) => {
-    console.log("MONGO db connection failed !!" ,err)
-})
-
-
+    .catch((err) => {
+        // Log an error if the database connection fails
+        console.log("MONGO db connection failed !!", err);
+    });
 
 
 
