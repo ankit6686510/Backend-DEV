@@ -6,7 +6,7 @@ import {User} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 
-
+// registering the user
 const registerUser  = asyncHandler( async (req,res) => {
     //get user detail from frontend
     //validation-non empty
@@ -24,6 +24,7 @@ const registerUser  = asyncHandler( async (req,res) => {
     // if(fullName===""){
     //     throw new ApiError(400,"full name is required")
     // }
+    //
     if(
         [fullName,email,userName,password].some(() =>
             field?.trim() ==="")
